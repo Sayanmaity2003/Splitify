@@ -3,12 +3,12 @@ import "./globals.css";
 import Header from "@/components/header";
 import { Inter } from "next/font/google";
 import { ConvexClientProvider } from "@/components/convex-client-provider";
-// import { ConvexReactClient } from "convex/react";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Splitr",
+  title: "Splitify",
   description: "The smartest way to split expenses with friends",
 };
 
@@ -24,10 +24,12 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={`${inter.className}`}>
-        <ConvexClientProvider>
-          <Header />
-          <main className="min-h-screen">{children}</main>
-        </ConvexClientProvider>
+        <ClerkProvider>
+          <ConvexClientProvider>
+            <Header />
+            <main className="min-h-screen">{children}</main>
+          </ConvexClientProvider>
+        </ClerkProvider>
       </body>
     </html>
   );
