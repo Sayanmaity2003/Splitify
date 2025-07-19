@@ -1,9 +1,11 @@
-import { Geist, Geist_Mono } from "next/font/google";
+// "use client"
 import "./globals.css";
 import Header from "@/components/header";
-import {Inter} from "next/font/google";
+import { Inter } from "next/font/google";
+import { ConvexClientProvider } from "@/components/convex-client-provider";
+// import { ConvexReactClient } from "convex/react";
 
-const inter = Inter({subsets: ["latin"]});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Splitr",
@@ -14,13 +16,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/logos/logo-s.png" type="image/png" sizes="any" />
+        <link
+          rel="icon"
+          href="/logos/logo-s.png"
+          type="image/png"
+          sizes="any"
+        />
       </head>
-      <body
-        className={`${inter.className}`}
-      >
-        <Header/>
-        <main className="min-h-screen">{children}</main>
+      <body className={`${inter.className}`}>
+        <ConvexClientProvider>
+          <Header />
+          <main className="min-h-screen">{children}</main>
+        </ConvexClientProvider>
       </body>
     </html>
   );
