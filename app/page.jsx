@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="flex flex-col pt-16">
       {/* -----Hero Section----- */}
-      Welcome to Splitify
+      {/* Welcome to Splitify */}
       <section className="mt-20 pb-12 space-y-10 md:space-y-15 px-5">
         <div className="container mx-auto px-4 md:px-6 text-center space-y-6">
           <Badge variant="outline" className="bg-violet-100 text-violet-700">
