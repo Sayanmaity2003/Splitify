@@ -9,10 +9,12 @@ import { Plus, User, Users } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import { BarLoader } from "react-spinners";
+import CreateGroupModal from "./_components/create-group-modal";
+import { useRouter } from "next/navigation";
 
 const ContactsPage = () => {
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
-  // const router = useRouter();
+  const router = useRouter();
   // const searchParams = useSearchParams();
   const { data, isLoading } = useConvexQuery(api.contacts.getAllContacts);
 
@@ -121,6 +123,14 @@ const ContactsPage = () => {
           )}
         </div>
       </div>
+      {/* Create group modal  */}
+      <CreateGroupModal
+        isOpen={isCreateGroupModalOpen}
+        onClose={() => setIsCreateGroupModalOpen(false)}
+        onSuccess={(groupId) => {
+          router.push(`/groups/${groupId}`);
+        }}
+      />
     </div>
   );
 };
