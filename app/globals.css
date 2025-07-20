@@ -121,3 +121,12 @@
   }
 } 
 
+
+@utility gradient {
+  @apply bg-gradient-to-r from-violet-600 to-violet-400;
+}
+
+@utility gradient-title {
+  @apply gradient font-extrabold tracking-tighter text-transparent bg-clip-text pb-1 pr-2;
+}
+
