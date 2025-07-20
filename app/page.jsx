@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div>Welcome to Splitify
+    <div className="pt-16">Welcome to Splitify
       <br />
       <Button variant={'destructive'}>Click</Button>
     </div>
