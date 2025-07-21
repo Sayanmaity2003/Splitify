@@ -1,4 +1,5 @@
 import { query } from "./_generated/server";
+import { internal } from "./_generated/api";
 
 // Get user balances
 export const getUserBalances = query({
