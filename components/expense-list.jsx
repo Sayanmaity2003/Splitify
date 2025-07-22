@@ -54,22 +54,7 @@ const ExpenseList = ({
     );
   };
 
-  // Handle delete expense
-  const handleDeleteExpense = async (expense) => {
-    // Use basic JavaScript confirm
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this expense? This action cannot be undone."
-    );
-
-    if (!confirmed) return;
-
-    try {
-      await deleteExpense.mutate({ expenseId: expense._id });
-      toast.success("Expense deleted successfully");
-    } catch (error) {
-      toast.error("Failed to delete expense: " + error.message);
-    }
-  };
+  
   return (
     <div className="flex flex-col gap-4">
       {expenses.map((expense) => {

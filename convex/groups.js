@@ -1,3 +1,4 @@
+import { internal } from "./_generated/api";
 import { query } from "./_generated/server";
 import { v } from "convex/values";
 export const getGroupExpenses = query({
@@ -106,6 +107,36 @@ export const getGroupExpenses = query({
       ledger[s.paidByUserId][s.receivedByUserId] -= s.amount; // they paid back
     }
 
+    //Simpilify the Ledger (Dept Simplification)
+    //-------------------------------------------
+    /*
+    Example with a circular dept:
+    - Initial ledger:
+     - user1 owes user2 10
+     - user2 owes user3 15
+     - user3 owes user1 5
+    - After simplification:
+     - user1 owes user2 5 
+     - user2 owes user3 15 
+     - user3 owes user1 0
+
+     This reduces the circular dept pattern
+    */
+    ids.forEach((a) => {
+      ids.forEach((b) => {
+        if (a >= b) return; // visit each unordered pair once
+        const diff = ledger[a][b] - ledger[b][a];
+        if (diff > 0) {
+          ledger[a][b] = diff;
+          ledger[b][a] = 0;
+        } else if (diff < 0) {
+          ledger[b][a] = -diff;
+          ledger[a][b] = 0;
+        } else {
+          ledger[a][b] = ledger[b][a] = 0;
+        }
+      });
+    });
     /* ----------  shape the response ---------- */
     const balances = memberDetails.map((m) => ({
       ...m,
